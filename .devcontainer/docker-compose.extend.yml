@@ -1,0 +1,9 @@
+version: '3'
+services:
+  webapp:
+    volumes:
+      # all paths in the files are relative to the base Compose file
+      - .:/app:cached
+
+    # keep container running until manually stopped
+    entrypoint: /bin/sh -c "while sleep 1000; do :; done"
