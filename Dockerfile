@@ -43,7 +43,6 @@ COPY --from=production /usr/local/lib/python3.11/site-packages /usr/local/lib/py
 COPY requirements-dev.txt ./
 RUN pip install --no-cache-dir -r requirements-dev.txt
 
-# init pre-commit hooks
 COPY .pre-commit-config.yaml ./
 
 ENTRYPOINT [ "bash" ]
