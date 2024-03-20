@@ -19,7 +19,6 @@
     "postCreateCommand": "pre-commit install",
     // "runArgs": [
     //     "--network=host",
-    //     ""
     // ],
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
@@ -30,6 +29,8 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
+                "editor.tabSize": 4,
+                "editor.autoIndent": "advanced",
                 "editor.formatOnSave": true,
                 "editor.formatOnPaste": false,
                 "notebook.formatOnSave.enabled": true,
@@ -51,6 +52,7 @@
                 "dotenv.dotenv-vscode",
                 "github.copilot",
                 "GitHub.copilot-chat",
+                "ms-azuretools.vscode-docker",
                 "ms-python.python",
                 "ms-python.isort",
                 "ms-python.mypy-type-checker",
