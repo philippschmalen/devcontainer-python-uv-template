@@ -14,16 +14,10 @@ WORKDIR /app
 # pin pip
 RUN python -m pip install --upgrade pip==24.0
 # install pipenv
-RUN pip install pipenv==2023.11.15
+RUN pip install pipenv==2023.12.1
 
-# if you add dependencies, add their package name to Pipfile
-# and resolve dependencies with pipenv with the following command
-# RUN pipenv lock && pipenv requirements > requirements.txt
-
-# comment out if resolving dependencies with pipenv
+# install production dependencies
 COPY requirements.txt ./
-
-# install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ENTRYPOINT ['python', '-m', 'main']
@@ -31,18 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ---- Development Stage ----
 FROM production as development
 
-# copy python lib from production
+# copy python lib from production layer
 COPY --from=production /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 
-# install dev dependencies
-# add dev dependencies to the Pipfile below [dev-packages]
-# and resolve dependencies with pipenv with the following command
-# RUN pipenv lock --dev-only && pipenv requirements --dev-only > requirements.txt
-
-# comment out if resolving dependencies with pipenv
+# install development dependencies
 COPY requirements-dev.txt ./
 RUN pip install --no-cache-dir -r requirements-dev.txt
-
-COPY .pre-commit-config.yaml ./
-
-ENTRYPOINT [ "bash" ]
