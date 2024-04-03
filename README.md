@@ -1,5 +1,7 @@
 # Production-ready, automated and robust Python project-template
 
+## TODO
+
 > Opinionated set of tools for developing in Python and best practices around building data-intensive applications.
 > Reproducible, robust and yet simple development setup for python.
 > By a data person that loves developing using [VSCode devcontainer](https://code.visualstudio.com/docs/containers/quickstart-python).
@@ -55,9 +57,12 @@ pipenv lock --dev-only && pipenv requirements --dev-only > requirements-dev.txt
 - pre-commit hooks: pre-commit
 - environment variables: python-dotenv
 
-## Development practices
+## Development practices & style
 
-- write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/), most importantly: Explain what and why in imperative mood instead of "how"
-- docstrings following [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
-- If you want to keep a changelog, adapt principles of https://common-changelog.org/, written by humans for humans, a clean git history as foundation
-- release with tags and changelog using `git-release`: https://github.com/anton-yurchenko/git-release
+- write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/): *What* and *why* in imperative mood instead of "how"
+- agree on git workflow, recommended [trunk-based development](https://trunkbaseddevelopment.com/)
+- Use [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) when building docker images and only include the needed runtime dependencies in the final image to keep the built images smaller.
+- Follow a styleguide like [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+- Tag with [SemVer:2.0.0](https://semver.org/spec/v2.0.0.html) or [CalVer](https://calver.org/)
+- For a changelog, adapt principles of [common-changelog](https://common-changelog.org/), written by humans for humans, a clean git history as foundation
+- release with tags and changelog using [`git-release`](https://github.com/anton-yurchenko/git-release)

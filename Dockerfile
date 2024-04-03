@@ -25,6 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ---- Development Stage ----
 FROM production as development
 
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
 # copy python lib from production layer
 COPY --from=production /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 
