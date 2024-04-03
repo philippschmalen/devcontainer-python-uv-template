@@ -1,7 +1,5 @@
 # Production-ready, automated and robust Python project-template
 
-## TODO
-
 > Opinionated set of tools for developing in Python and best practices around building data-intensive applications.
 > Reproducible, robust and yet simple development setup for python.
 > By a data person that loves developing using [VSCode devcontainer](https://code.visualstudio.com/docs/containers/quickstart-python).
