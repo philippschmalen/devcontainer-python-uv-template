@@ -60,6 +60,7 @@
                 "dotenv.dotenv-vscode",
                 "github.copilot",
                 "GitHub.copilot-chat",
+                "GitHub.vscode-pull-request-github",
                 "ms-azuretools.vscode-docker",
                 "ms-python.python",
                 "ms-python.mypy-type-checker",
