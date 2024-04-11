@@ -82,7 +82,3 @@ warn_return_any = false
 warn_unused_configs = true
 disallow_untyped_defs = false
 ignore_missing_imports = false
-
-[[tool.mypy.overrides]]
-module = "redis"
-ignore_missing_imports = true

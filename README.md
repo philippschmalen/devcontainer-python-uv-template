@@ -43,7 +43,7 @@ pipenv lock --dev-only && pipenv requirements --dev-only > requirements-dev.txt
 
 ## Tooling
 
-- dependency management: pipenv, poetry
+- dependency management: pipenv or poetry
 - environment: VS Code dev containers with `python:<version-tag>`
   - note: not using `python:<version>-slim` due to possible build issues [caused by missing `gcc`](https://github.com/watson-developer-cloud/python-sdk/issues/418#issuecomment-375740919)
   - outside of docker use `pyenv` to install and set python version
