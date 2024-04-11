@@ -15,7 +15,7 @@
         "./docker-compose.extend.yml"
     ],
     // name of the service that devcontainer should connect to once running
-    "service": "webapp",
+    "service": "app",
     "workspaceFolder": "/app",
     // git repos reported as unsafe if not added as a safe directory
     "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && pre-commit install",

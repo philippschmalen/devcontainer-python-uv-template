@@ -1,6 +1,6 @@
 version: '3'
 services:
-  webapp:
+  app:
     volumes:
       # all paths in the files are relative to the base Compose file
       - .:/app:cached

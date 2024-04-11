@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
+            "justMyCode": true
+        },
+        {
+            "name": "Python: src",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "autoReload": {
+                "enable": true
+            },
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src",
+                "PYTHONUNBUFFERED": "1",
+                "PYTHONWRITEBYTECODE": "1",
+            },
+            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
+            "justMyCode": true,
+        },
+        {
+            "name": "Python: ./",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "autoReload": {
+                "enable": true
+            },
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "PYTHONUNBUFFERED": "1",
+                "PYTHONWRITEBYTECODE": "1",
+            },
+            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
+            "justMyCode": true,
+        }
+    ]
+}
