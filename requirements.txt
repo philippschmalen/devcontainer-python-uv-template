@@ -1,2 +1,0 @@
--i https://pypi.org/simple
-python-dotenv==1.0.1; python_version >= '3.8'

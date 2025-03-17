@@ -1,36 +1,33 @@
-# syntax=docker/dockerfile:1
-# Keep this syntax directive! It's used to enable Docker BuildKit
+ARG PYTHON_VERSION=3.12-slim-bookworm
+
+# ---- Builder Stage ----
+FROM python:${PYTHON_VERSION} AS builder
+
+ENV UV_PROJECT_ENVIRONMENT=/usr/local/.venv
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:0.6.6 /uv /uvx /bin/
+
+WORKDIR /app
+COPY ./pyproject.toml .
+COPY uv.lock .
+RUN uv sync
 
 # ---- Production Stage ----
-FROM python:3.11.8 as production
+FROM python:${PYTHON_VERSION} AS production
 
-# Ensures Python output is directly logged in the console
-ENV PYTHONUNBUFFERED=1 \
-    # Reduce clutter to prevents Python from writing .pyc files
-    PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PATH="/usr/local/.venv/bin:$PATH"
 
 WORKDIR /app
 
-# pin pip
-RUN python -m pip install --upgrade pip==24.0
-# install pipenv
-RUN pip install pipenv==2023.12.1
+COPY --from=builder /usr/local/.venv /usr/local/.venv
+COPY src src
 
-# install production dependencies
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-# ENTRYPOINT ['python', '-m', 'main']
-
-# ---- Development Stage ----
-FROM production as development
-
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
-
-# copy python lib from production layer
-COPY --from=production /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-
-# install development dependencies
-COPY requirements-dev.txt ./
-RUN pip install --no-cache-dir -r requirements-dev.txt
+CMD [ "bash" ]
