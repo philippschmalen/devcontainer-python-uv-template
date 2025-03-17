@@ -3,7 +3,10 @@ ARG PYTHON_VERSION=3.12-slim-bookworm
 # ---- Builder Stage ----
 FROM python:${PYTHON_VERSION} AS builder
 
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 ENV UV_PROJECT_ENVIRONMENT=/usr/local/.venv
+ENV PATH="/usr/local/.venv/bin:$PATH"
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
