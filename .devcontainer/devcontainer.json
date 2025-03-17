@@ -2,32 +2,20 @@
     // For format details, see https://aka.ms/devcontainer.json.
     // For config options, see the README at:
     // https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
-    "name": "Existing Dockerfile",
-    // "build": {
-    //     "context": "..",
-    //     "dockerfile": "../Dockerfile",
-    //     // if you have a development stage in a multi-stage Dockerfile
-    //     "target": "production",
-    // },
-    // using docker-compose: https://containers.dev/implementors/json_reference/#compose-specific
+    "name": "Docker compse + extend",
     "dockerComposeFile": [
         "../docker-compose.yml",
         "./docker-compose.extend.yml"
     ],
-    // // name of the service that devcontainer should connect to once running
+    // name of the service that devcontainer should connect to once running
     "service": "app",
     "workspaceFolder": "/app",
-    // git repos reported as unsafe if not added as a safe directory
+    // install pre-commit hooks and avoid add git repos reported as unsafe
     "postCreateCommand": "pre-commit install && git config --global --add safe.directory ${containerWorkspaceFolder}",
-    // "runArgs": [
-    //     "--network=host",
-    // ],
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
     },
-    // Configure tool-specific properties.
     "customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
@@ -61,7 +49,6 @@
                 // see https://github.com/microsoft/vscode-remote-release/issues/9494#issuecomment-2039652897
                 "extensions.verifySignature": false
             },
-            // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "charliermarsh.ruff",
                 "christian-kohler.path-intellisense",
@@ -88,10 +75,4 @@
             ]
         }
     }
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
-    // Configure tool-specific properties.
-    // "customizations": {},
-    // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-    // "remoteUser": "devcontainer"
 }

@@ -6,7 +6,6 @@ dependencies = [
 ]
 
 [tool.ruff]
-# automatically fix issues like removing unused imports
 fix = true
 
 [tool.ruff.lint.isort]
