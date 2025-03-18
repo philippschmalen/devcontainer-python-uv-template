@@ -13,7 +13,6 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.11.0
     hooks:
-      # linting with automated fixing
       - id: ruff
         args: [--fix]
         types_or: [python, pyi, jupyter]
@@ -37,3 +36,12 @@ repos:
           uv.lock|
           (\/.*?\.[\w:]+)/uv.lock|
         args: ["--ignore-words-list", "implementors"]
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: python -m pytest
+        language: system
+        pass_filenames: false
+        types: [python]
+        always_run: true
