@@ -1,6 +1,21 @@
+name: my_project
+
 services:
   app:
     build:
       context: .
       target: production
       dockerfile: Dockerfile
+    container_name: '${COMPOSE_PROJECT_NAME}_app'
+    platform: linux/amd64
+    hostname: app
+    volumes:
+      - my_project-data:/data
+    networks:
+      - my_project-net
+
+volumes:
+  my_project-data:
+
+networks:
+  my_project-net:
