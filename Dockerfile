@@ -1,36 +1,42 @@
-# syntax=docker/dockerfile:1
-# Keep this syntax directive! It's used to enable Docker BuildKit
+ARG PYTHON_VERSION=3.12-slim-bookworm
 
-# ---- Production Stage ----
-FROM python:3.11.8 as production
+# ---- Builder Stage ----
+FROM python:${PYTHON_VERSION} AS builder
 
-# Ensures Python output is directly logged in the console
-ENV PYTHONUNBUFFERED=1 \
-    # Reduce clutter to prevents Python from writing .pyc files
-    PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
+ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:0.6.7 /uv /uvx /bin/
 
 WORKDIR /app
 
-# pin pip
-RUN python -m pip install --upgrade pip==24.0
-# install pipenv
-RUN pip install pipenv==2023.12.1
+COPY ./pyproject.toml .
+COPY uv.lock .
 
-# install production dependencies
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv sync
 
-# ENTRYPOINT ['python', '-m', 'main']
+# ---- Production Stage ----
+FROM python:${PYTHON_VERSION} AS production
 
-# ---- Development Stage ----
-FROM production as development
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
+ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
+ENV PORT=8000
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+WORKDIR /app
 
-# copy python lib from production layer
-COPY --from=production /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT} ${UV_PROJECT_ENVIRONMENT}
+COPY src src
 
-# install development dependencies
-COPY requirements-dev.txt ./
-RUN pip install --no-cache-dir -r requirements-dev.txt
+EXPOSE ${PORT}
+
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT}"]

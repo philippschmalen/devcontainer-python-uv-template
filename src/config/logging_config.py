@@ -47,5 +47,7 @@ def setup_logging(logger_name: str) -> logging.Logger:
     "Configures a logger with a name. Use __name__ for the module's name."
     logging.config.dictConfig(LOGGING_CONFIG)
     logger = logging.getLogger(logger_name)
-    logger.setLevel(logging.DEBUG if os.getenv("DEVELOPMENT") else logging.INFO)
+    logger.setLevel(
+        logging.DEBUG if os.getenv("DEVELOPMENT") == "True" else logging.INFO
+    )
     return logger

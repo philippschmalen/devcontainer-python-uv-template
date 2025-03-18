@@ -1,9 +1,12 @@
-version: '3'
 services:
-  webapp:
+  app:
+    build:
+      context: .
+      target: builder
+      dockerfile:   Dockerfile
     volumes:
       # all paths in the files are relative to the base Compose file
       - .:/app:cached
 
     # keep container running until manually stopped
-    entrypoint: /bin/sh -c "while sleep 1000; do :; done"
+    entrypoint: /bin/bash -c "while sleep 1000; do :; done"
