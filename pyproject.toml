@@ -1,18 +1,16 @@
 [project]
 name = "python-project-template"
 version = "0.1.0"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.11",
+    "pydantic>=2.10.6",
+    "python-dotenv>=1.0.1",
+    "uvicorn>=0.34.0",
 ]
 
 [tool.ruff]
 fix = true
-
-[tool.ruff.lint.isort]
-case-sensitive = true
-combine-as-imports = true
-force-wrap-aliases = true
-split-on-trailing-comma = true
 
 [tool.mypy]
 warn_return_any = false
@@ -22,9 +20,10 @@ ignore_missing_imports = false
 
 [tool.uv]
 dev-dependencies = [
-    "black",
     "ruff",
     "pre-commit",
     "mypy",
     "debugpy>=1.8.13",
+    "pytest>=8.3.5",
+    "httpx>=0.28.1",
 ]
