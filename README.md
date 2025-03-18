@@ -4,11 +4,15 @@
 > Reproducible, robust and yet simple development setup for python.
 > By a data person that loves developing using [VSCode devcontainer](https://code.visualstudio.com/docs/containers/quickstart-python).
 
+## Prerequisites
+
+- [Git](https://git-scm.com/downloads)
+- [Docker](https://docs.docker.com/get-docker/)
+- [VSCode](https://code.visualstudio.com/download) with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
 ## Getting started
 
 ```bash
-# Requirements: Git, Docker, VSCode
-
 # Clone the repository
 git clone <this-repo>
 cd <this-repo>
