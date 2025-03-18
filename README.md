@@ -1,4 +1,4 @@
-# Production-ready Python project-template
+# Python project-template with VSCode Devcontainer
 
 > Opinionated set of tools for developing in Python
 > Reproducible, robust and yet simple development setup for python.
@@ -6,17 +6,17 @@
 
 ## Getting started
 
-First time setup:
-
 ```bash
 # Requirements: Git, Docker, VSCode
 
 # Clone the repository
 git clone <this-repo>
+cd <this-repo>
 
 # create .env for configs and secrets, see .env.sample
 cp .env.sample .env
 # Update .env with your settings as needed
+# DEVELOPMENT=True enables debug logging
 
 # Open the project in VSCode
 code .
@@ -60,12 +60,13 @@ This approach ensures that all developers work with identical dependencies and c
   - (optional) pytest-cov, pytest-mock, hypothesis, nox
 - linting & formatting: `ruff`
 - type-checking: `mypy`
-- `pre-commit` hooks
 - environment variables: `python-dotenv`
+- `pre-commit` hooks
+
 
 ## Development practices & style
 
-- write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/): *What* and *why* in imperative mood instead of "how"
+- write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/): *What* and *why* in imperative mood instead of *how*
 - follow [12-factor principles](https://12factor.net/)
 - agree on git workflow, for example [trunk-based development](https://trunkbaseddevelopment.com/)
 - Use [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) to structure docker images and only include the needed runtime dependencies for smaller image size and faster builds
