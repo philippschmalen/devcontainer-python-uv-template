@@ -1,8 +1,8 @@
 # Python project-template with VSCode Devcontainer
 
-> Opinionated set of tools for developing in Python
-> Reproducible, robust and yet simple development setup for python.
-> By a data person that loves developing using [VSCode devcontainer](https://code.visualstudio.com/docs/containers/quickstart-python).
+> Opinionated set of tools for developing in Python.
+> Reproducible, robust, and yet simple development setup for Python.
+> By a data person that loves developing using [VSCode Dev Containers](https://code.visualstudio.com/docs/containers/quickstart-python).
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ pre-commit
 
 ## Background
 
-This template uses VSCode's [Development Containers](https://code.visualstudio.com/docs/devcontainers/containers) (devcontainers) to provide a consistent, isolated development environment. The setup leverages Docker Compose with an extension pattern:
+This template uses VSCode's [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) (devcontainers) to provide a consistent, isolated development environment. The setup leverages Docker Compose with an extension pattern:
 
 - `docker-compose.yml` defines the base service configuration
 - `.devcontainer/docker-compose.extend.yml` extends the base configuration specifically for development
@@ -61,7 +61,6 @@ This approach ensures that all developers work with identical dependencies and c
 - Multi-stage build with `builder`, also used for development, and `production`
 - debugging: `debugpy`
 - testing: `pytest`
-  - (optional) pytest-cov, pytest-mock, hypothesis, nox
 - linting & formatting: `ruff`
 - type-checking: `mypy`
 - environment variables: `python-dotenv`
