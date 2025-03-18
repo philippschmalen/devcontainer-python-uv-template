@@ -5,31 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python: FastAPI",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
-            "justMyCode": true
-        },
-        {
-            "name": "Python: src",
-            "type": "debugpy",
-            "request": "launch",
-            "cwd": "${workspaceFolder}/src",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "autoReload": {
-                "enable": true
-            },
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8080"
+            ],
+            "jinja": true,
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/src",
-                "PYTHONUNBUFFERED": "1",
-                "PYTHONWRITEBYTECODE": "1",
-            },
-            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
-            "justMyCode": true,
+                "PYTHONPATH": "${workspaceFolder}"
+            }
         },
         {
             "name": "Python: ./",
@@ -43,10 +34,7 @@
             },
             "env": {
                 "PYTHONPATH": "${workspaceFolder}",
-                "PYTHONUNBUFFERED": "1",
-                "PYTHONWRITEBYTECODE": "1",
             },
-            // debugger will only step through your code, and will not step into the code of any libraries or modules you're using
             "justMyCode": true,
         }
     ]
