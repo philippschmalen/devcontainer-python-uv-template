@@ -1,8 +1,16 @@
 # Production-ready Python Template
+
 Anyone working in Python knows how quickly dependency management hell can arise or how easily you might get stuck resolving environment issues rather than developing. This Python template standardizes everything from linting and formatting to the complete development environment, streamlining your workflow.
 
 > Note on style: Since the Python tooling and ecosystem constantly evolve, diving deeply into individual tools may not be worthwhile. Therefore, this article concisely highlights the main features of this template in bullet points, respecting your time.
+
 ## TLDR;
+
+```bash
+# Click on the "Use this template" button on GitHub
+# Or clone the repo
+git clone https://github.com/solita/production-ready-python-template.git my-python-project
+```
 
 - VSCode Dev Containers with Docker Compose for consistent, isolated environments
 - Multi-stage Docker builds that keep images lean
