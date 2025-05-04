@@ -6,13 +6,16 @@ services:
       context: .
       target: production
       dockerfile: Dockerfile
-    container_name: '${COMPOSE_PROJECT_NAME}_app'
+    env_file: .env
     platform: linux/amd64
+    container_name: '${COMPOSE_PROJECT_NAME}_app'
     hostname: app
     volumes:
-      - my_project-data:/data
+      - ${COMPOSE_PROJECT_NAME}-data:/data
     networks:
-      - my_project-net
+      - ${COMPOSE_PROJECT_NAME}-net
+    ports:
+      - 8000:8000
 
 volumes:
   my_project-data:

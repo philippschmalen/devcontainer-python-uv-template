@@ -3,7 +3,7 @@ services:
     build:
       context: .
       target: builder
-      dockerfile:   Dockerfile
+      dockerfile: Dockerfile
     volumes:
       # all paths in the files are relative to the base Compose file
       - .:/app:cached
