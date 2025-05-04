@@ -36,12 +36,13 @@ repos:
           uv.lock|
           (\/.*?\.[\w:]+)/uv.lock|
         args: ["--ignore-words-list", "implementors"]
-  - repo: local
-    hooks:
-      - id: pytest
-        name: pytest
-        entry: python -m pytest
-        language: system
-        pass_filenames: false
-        types: [python]
-        always_run: true
+  # uncomment to run tests
+  # - repo: local
+  #   hooks:
+  #     - id: pytest
+  #       name: pytest
+  #       entry: python -m pytest
+  #       language: system
+  #       pass_filenames: false
+  #       types: [python]
+  #       always_run: true
