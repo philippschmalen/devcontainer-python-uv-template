@@ -10,7 +10,7 @@
     // name of the service that devcontainer should connect to once running
     "service": "app",
     "workspaceFolder": "/app",
-    // install pre-commit hooks and avoid add git repos reported as unsafe
+    // install pre-commit hooks and avoid git repos reported as unsafe
     "postCreateCommand": "pre-commit install && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
@@ -53,7 +53,6 @@
                 "charliermarsh.ruff",
                 "christian-kohler.path-intellisense",
                 "dotenv.dotenv-vscode",
-                "Equinusocio.vsc-material-theme",
                 "github.copilot",
                 "GitHub.copilot-chat",
                 "GitHub.vscode-pull-request-github",

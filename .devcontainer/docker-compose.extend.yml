@@ -1,12 +1,20 @@
+name: my_project_devcontainer
+
 services:
   app:
     build:
       context: .
       target: builder
       dockerfile: Dockerfile
+    container_name: '${COMPOSE_PROJECT_NAME}'
     volumes:
       # all paths in the files are relative to the base Compose file
       - .:/app:cached
 
     # keep container running until manually stopped
     entrypoint: /bin/bash -c "while sleep 1000; do :; done"
+    networks:
+      - my_project-net
+
+networks:
+  my_project-net:

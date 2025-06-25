@@ -20,6 +20,7 @@ git clone <this-repo> <your-project-name>
 cd <your-project-name>
 # Or use GitHub's "Use this template" button
 # Or use GitHub CLI: gh repo create <your-project-name> --template <this-repo>
+# just ensure to `git init`, otherwise pre-commit fails
 ```
 
 2. **Configure Environment**

@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=ghcr.io/astral-sh/uv:0.6.7 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.7.14 /uv /uvx /bin/
 
 WORKDIR /app
 
@@ -39,4 +39,4 @@ COPY src src
 
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT}"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

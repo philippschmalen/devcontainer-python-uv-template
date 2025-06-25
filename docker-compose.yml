@@ -8,12 +8,12 @@ services:
       dockerfile: Dockerfile
     env_file: .env
     platform: linux/amd64
-    container_name: '${COMPOSE_PROJECT_NAME}_app'
+    container_name: '${COMPOSE_PROJECT_NAME}'
     hostname: app
     volumes:
-      - ${COMPOSE_PROJECT_NAME}-data:/data
+      - my_project-data:/data
     networks:
-      - ${COMPOSE_PROJECT_NAME}-net
+      - my_project-net
     ports:
       - 8000:8000
 
