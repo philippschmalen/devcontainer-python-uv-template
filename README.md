@@ -63,7 +63,24 @@ This template uses VSCode's [Dev Containers](https://code.visualstudio.com/docs/
 
 This approach ensures that all developers work with identical dependencies and configurations, regardless of their local setup, while maintaining the ability to edit files directly on the host system.
 
-## Tooling
+### TLDR code & design rules
+
+* Simplicity first: keep functions small, clear, and free of bloat.
+* Clarity > cleverness: readable names and explicit logic beat tricks.
+* YAGNI: implement only today’s requirements; postpone “nice-to-haves.”
+* Single responsibility: one purpose per module, class, and function.
+* Composition over inheritance: favour plain objects; if an interface is needed, use an `ABC`, not a `Protocol`.
+* Pythonic, not painful: embrace idioms without overcomplicating code.
+* Fail fast & loud: validate inputs early and raise clear errors.
+* Typed & documented: PEP 484 type hints + Google-style docstrings.
+* Testable by design: write pytest-ready, side-effect-free units.
+* Immutable by default: fewer surprises, safer concurrency.
+* Dependency discipline: keep `pyproject.toml` lean and current.
+* Secure defaults: load secrets from env vars; least-privilege access.
+* Measure before tuning: profile first, optimise real hotspots only.
+* Continuous refactor: pay technical-debt in small, frequent steps.
+
+### Tooling
 
 - [`uv`](https://github.com/astral-sh/uv) for dependency management
 - VS Code devcontainers with `docker compose`-file
@@ -75,7 +92,7 @@ This approach ensures that all developers work with identical dependencies and c
 - environment variables: `python-dotenv`
 - `pre-commit` hooks
 
-## Development practices & style
+### Development practices & style
 
 - write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/): *What- and *why- in imperative mood instead of *how*
 - follow [12-factor principles](https://12factor.net/)
