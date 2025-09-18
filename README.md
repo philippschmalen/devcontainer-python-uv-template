@@ -1,6 +1,5 @@
 # Python project-template with VSCode Devcontainer
 
-> Note on tooling:
 > Reproducible, robust, and yet simple development setup for Python.
 > Developing in [VSCode Dev Containers](https://code.visualstudio.com/docs/containers/quickstart-python).
 
@@ -50,6 +49,7 @@ code .
 
 - Add dependencies: `uv add <package-name>` (runs inside the container)
 - `pre-commit` (linting, formatting, testing) runs automatically on commit
+- want to ignore files that are specific to *you* without using `.gitignore`? Add them to `.git/info/exclude`
 
 
 ## Background
