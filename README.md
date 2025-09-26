@@ -102,3 +102,4 @@ This approach ensures that all developers work with identical dependencies and c
 - Tag releases with [SemVer:2.0.0](https://semver.org/spec/v2.0.0.html) or [CalVer](https://calver.org/)
 - For a changelog, adapt principles of [common-changelog](https://common-changelog.org/), written by humans for humans, a clean git history as foundation
 - release with tags and changelog using [`git-release`](https://github.com/anton-yurchenko/git-release)
+- `AGENTS.md`: Best practices on [writing customer instructions for Github Copilot](https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/)

@@ -14,8 +14,6 @@ services:
       - my_project-data:/data
     networks:
       - my_project-net
-    ports:
-      - 8000:8000
 
 volumes:
   my_project-data:
