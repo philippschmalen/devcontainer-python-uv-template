@@ -43,6 +43,7 @@
                 "python.analysis.extraPaths": [
                     "${workspaceFolder}"
                 ],
+                "python.defaultInterpreterPath": "/usr/.venv/bin/python",
                 "ruff.enable": true,
                 "ruff.lint.enable": true,
                 // ensures extensions are installed

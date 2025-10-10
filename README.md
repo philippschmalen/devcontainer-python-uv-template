@@ -15,11 +15,12 @@
 
 ```bash
 # Clone the repo
-git clone <this-repo> <your-project-name>
-cd <your-project-name>
 # Or use GitHub's "Use this template" button
 # Or use GitHub CLI: gh repo create <your-project-name> --template <this-repo>
-# just ensure to `git init`, otherwise pre-commit fails
+git clone <this-repo> <your-project-name>
+cd <your-project-name>
+# change remote url to your repo
+git remote set-url origin git://new.url.here
 ```
 
 2. **Configure Environment**
@@ -43,6 +44,9 @@ cp .env.sample .env
 code .
 # When prompted, or using the Command Palette (Ctrl+Shift+P), select:
 # > Dev Containers: Open Folder in Container (or similar)
+
+# after build you should see
+# CTRL+p > Python: Select Interpreter > /usr/.venv/bin/python (as defined in `Dockerfile`)
 ```
 
 5. **Develop**
