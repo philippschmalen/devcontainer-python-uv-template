@@ -11,7 +11,9 @@
 
 ## Getting started
 
-1. **Clone or Use Template:**
+Takes only three steps.
+
+1. **Clone the repo**
 
 ```bash
 # Clone the repo
@@ -22,22 +24,14 @@ cd <your-project-name>
 # change remote url to your repo
 git remote set-url origin git://new.url.here
 ```
-
-2. **Configure Environment**
-
-```bash
-# Copy sample environment file
-cp .env.sample .env
-# Edit .env if needed (e.g., set DEVELOPMENT=False)
-```
-
-3. **Replace Placeholders**
+e
+2. **Replace Placeholders**
 - Search and replace `my-project` in `docker-compose.yml` and `python-project-template` in `pyproject.toml` with your project name
 - Update `name`, `version` in `pyproject.toml`
 - Update the year and copyright holder in `LICENSE`
 - update this `README.md` for your project.
 
-4. **Open in VS Code & Dev Container**
+3. **Open in VS Code & Dev Container**
 
 ```bash
 # Open project folder in VS Code
@@ -48,8 +42,6 @@ code .
 # after build you should see
 # CTRL+p > Python: Select Interpreter > /usr/.venv/bin/python (as defined in `Dockerfile`)
 ```
-
-5. **Develop**
 
 - Add dependencies: `uv add <package-name>` (runs inside the container)
 - `pre-commit` (linting, formatting, testing) runs automatically on commit

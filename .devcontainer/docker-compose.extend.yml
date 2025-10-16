@@ -6,7 +6,7 @@ services:
       context: .
       target: builder
       dockerfile: Dockerfile
-    container_name: '${COMPOSE_PROJECT_NAME}'
+    container_name: "${COMPOSE_PROJECT_NAME}"
     volumes:
       # all paths in the files are relative to the base Compose file
       - .:/app:cached
