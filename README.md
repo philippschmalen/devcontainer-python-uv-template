@@ -48,6 +48,30 @@ code .
 - want to ignore files that are specific to *you* without using `.gitignore`? Add them to `.git/info/exclude`
 
 
+## Azure CLI setup
+
+Want to use an already authenticated `az cli` from the host?
+Add this to the following files:
+
+```json
+// .devcontainer/devcontainer.json
+"features": {
+        ...
+        // ADD THIS
+        "ghcr.io/devcontainers/features/azure-cli:1": {}
+    }
+```
+
+```yaml
+# .devcontainer/docker-compose.extend.yml
+    volumes:
+      ...
+      // ADD THIS
+      - ${HOME}/.azure:/root/.azure:rw
+```
+
+
+
 ## Background
 
 This template uses VSCode's [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) (devcontainers) to provide a consistent, isolated development environment. The setup leverages Docker Compose with an extension pattern:
