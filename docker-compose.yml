@@ -6,9 +6,10 @@ services:
       context: .
       target: production
       dockerfile: Dockerfile
-    env_file: .env
+    # uncomment if using .env for config/secrets
+    # env_file: .env
     platform: linux/amd64
-    container_name: '${COMPOSE_PROJECT_NAME}'
+    container_name: "${COMPOSE_PROJECT_NAME}"
     hostname: app
     volumes:
       - my_project-data:/data
