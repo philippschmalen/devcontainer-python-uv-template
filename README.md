@@ -24,9 +24,10 @@ cd <your-project-name>
 # change remote url to your repo
 git remote set-url origin git://new.url.here
 ```
-e
+
 2. **Replace Placeholders**
-- Search and replace `my-project` in `docker-compose.yml` and `python-project-template` in `pyproject.toml` with your project name
+- Search and replace `my_project` in `docker-compose.yml` and `python-project-template` in `pyproject.toml` with your project name
+- Search and replace for `my_project` in `.devcontainer/docker-compose.extend.yml` with your project name.
 - Update `name`, `version` in `pyproject.toml`
 - Update the year and copyright holder in `LICENSE`
 - update this `README.md` for your project.
