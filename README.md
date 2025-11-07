@@ -100,3 +100,53 @@ This approach ensures that all developers work with identical dependencies and c
 - For a changelog, adapt principles of [common-changelog](https://common-changelog.org/), written by humans for humans, a clean git history as foundation
 - release with tags and changelog using [`git-release`](https://github.com/anton-yurchenko/git-release)
 - `AGENTS.md`: Best practices on [writing customer instructions for Github Copilot](https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/)
+
+
+## Advanced example for Dockerfile
+
+```
+ARG PYTHON_VERSION=3.12-slim-bookworm
+
+# ---- Builder Stage ----
+# This is what runs in your dev environment
+FROM python:${PYTHON_VERSION} AS builder
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
+ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:0.7.14 /uv /uvx /bin/
+
+WORKDIR /app
+
+COPY ./pyproject.toml .
+COPY uv.lock .
+
+RUN uv sync
+
+# ---- Production Stage ----
+# This is what runs in the cloud
+FROM python:${PYTHON_VERSION} AS production
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
+ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
+ENV PORT=8000
+
+WORKDIR /app
+
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT} ${UV_PROJECT_ENVIRONMENT}
+COPY src src
+
+EXPOSE ${PORT}
+
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+```

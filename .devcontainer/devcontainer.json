@@ -10,8 +10,14 @@
     // name of the service that devcontainer should connect to once running
     "service": "app",
     "workspaceFolder": "/app",
+    "mounts": [
+        "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+        // optional if you use the plain text helper:
+        "source=${localEnv:HOME}/.git-credentials,target=/root/.git-credentials,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+    ],
     // install pre-commit hooks and avoid git repos reported as unsafe
-    "postCreateCommand": "pre-commit install && pre-commit && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "pre-commit install && git config --global --add safe.directory ${containerWorkspaceFolder} && pre-commit || true",
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },

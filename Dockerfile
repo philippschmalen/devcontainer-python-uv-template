@@ -1,6 +1,7 @@
-ARG PYTHON_VERSION=3.12-slim-bookworm
+ARG PYTHON_VERSION=3.12-bookworm
 
 # ---- Builder Stage ----
+# This is what runs in your dev environment
 FROM python:${PYTHON_VERSION} AS builder
 
 ENV PYTHONUNBUFFERED=1
@@ -20,23 +21,11 @@ WORKDIR /app
 
 COPY ./pyproject.toml .
 COPY uv.lock .
+RUN --mount=type=cache,target=/root/.cache/uv uv sync --no-install-project
 
-RUN uv sync
-
-# ---- Production Stage ----
-FROM python:${PYTHON_VERSION} AS production
-
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
-ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
-ENV PORT=8000
-
-WORKDIR /app
-
-COPY --from=builder ${UV_PROJECT_ENVIRONMENT} ${UV_PROJECT_ENVIRONMENT}
 COPY src src
+RUN uv sync # This will install the project package.
 
 EXPOSE ${PORT}
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
