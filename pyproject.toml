@@ -22,8 +22,8 @@ warn_unused_configs = true
 disallow_untyped_defs = false
 ignore_missing_imports = false
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "ruff",
     "pre-commit",
     "mypy",
