@@ -11,9 +11,9 @@
     "service": "app",
     "workspaceFolder": "/app",
     // install pre-commit hooks and avoid git repos reported as unsafe
-    "postCreateCommand": "pre-commit install && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "pre-commit install && pre-commit && git config --global --add safe.directory ${containerWorkspaceFolder}",
     "features": {
-        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/git:1": {}
     },
     "customizations": {
         "vscode": {
@@ -71,7 +71,7 @@
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
                 "tamasfe.even-better-toml",
-                "VisualStudioExptTeam.vscodeintellicode",
+                "VisualStudioExptTeam.vscodeintellicode"
             ]
         }
     }
