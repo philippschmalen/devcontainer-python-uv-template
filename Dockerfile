@@ -1,7 +1,5 @@
 ARG PYTHON_VERSION=3.12-bookworm
 
-# ---- Builder Stage ----
-# This is what runs in your dev environment
 FROM python:${PYTHON_VERSION} AS builder
 
 ENV PYTHONUNBUFFERED=1
