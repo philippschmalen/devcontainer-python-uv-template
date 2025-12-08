@@ -13,7 +13,7 @@ Note: Make sure to have PYTHONPATH at project root. Otherwise imports will not w
 import dotenv
 from fastapi import FastAPI
 
-from src.config.logging_config import setup_logging
+from python_project_template.config.logging_config import setup_logging
 
 dotenv.load_dotenv(override=True, verbose=True)
 config = dotenv.dotenv_values(verbose=True)
