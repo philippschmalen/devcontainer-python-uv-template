@@ -1,29 +1,37 @@
-ARG PYTHON_VERSION=3.12-bookworm
+# inspired by https://github.com/astral-sh/uv-docker-example/blob/main/Dockerfile
 
-FROM python:${PYTHON_VERSION} AS builder
+FROM python:3.12-bookworm
 
+ENV USER=nonroot
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
+# Copy from the cache instead of linking since it's a mounted volume
+ENV UV_LINK_MODE=copy
+ENV UV_TOOL_BIN_DIR=/usr/local/bin
+# avoid mounting .venv to host
+ENV UV_PROJECT_ENVIRONMENT=/home/$USER/.venv
 ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
-    build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN groupadd --system --gid 999 $USER \
+    && useradd --system --gid 999 --uid 999 --create-home $USER
 
-COPY --from=ghcr.io/astral-sh/uv:0.7.14 /uv /uvx /bin/
+# PRODUCTION USE: pin `uv` to a specific version (replace `latest` with <version>)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
-COPY ./pyproject.toml .
-COPY uv.lock .
-RUN --mount=type=cache,target=/root/.cache/uv uv sync --no-install-project
+# Install the project's dependencies using the lockfile and settings
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --no-install-project
 
-COPY src src
-RUN uv sync # This will install the project package.
+# Adding the rest separately allows optimal layer caching
+# PRODUCTION USE: add `--locked` and/or `--no-dev` as needed
+COPY . /app/
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync
 
-EXPOSE ${PORT}
+USER $USER
 
 CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
