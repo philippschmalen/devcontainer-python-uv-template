@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
+ENV UV_COMPILE_BYTECODE=1
 ENV UV_TOOL_BIN_DIR=/usr/local/bin
 # avoid mounting .venv to host
 ENV UV_PROJECT_ENVIRONMENT=/home/$USER/.venv
@@ -29,7 +30,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 RUN groupadd --system --gid 999 $USER \
-    && useradd --system --gid 999 --uid 999 --create-home $USER \
+    && useradd --system --gid 999 --uid 999 --create-home --shell /bin/bash $USER \
     && chown -R $USER:$USER /app
 
 # Install the project's dependencies using the lockfile and settings
