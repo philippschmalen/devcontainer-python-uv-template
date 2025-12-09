@@ -56,6 +56,8 @@
                 "python.defaultInterpreterPath": "/usr/.venv/bin/python",
                 "ruff.enable": true,
                 "cSpell.diagnosticLevel": "Hint",
+                // Code spell both danish and english
+                "cSpell.language": "en,da",
                 "ruff.lint.enable": true,
                 // ensures extensions are installed
                 // see https://github.com/microsoft/vscode-remote-release/issues/9494#issuecomment-2039652897
@@ -79,6 +81,7 @@
                 "ms-toolsai.vscode-jupyter-cell-tags",
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-danish",
                 "tamasfe.even-better-toml"
             ]
         }
