@@ -72,18 +72,6 @@ You can add this, to ensure you are logged in as your user. Or you can just run 
       - ${HOME}/.azure:/home/nonroot/.azure:rw
 ```
 
-## Vim installation
-```json
-// .devcontainer/devcontainer.json
-"features": {
-        ...
-        // ADD THIS
-        "ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {}
-    }
-// And add this next to the postCreateCommand:
-"postStartCommand": "alias vim='nvim'",
-```
-
 
 ## Background
 
