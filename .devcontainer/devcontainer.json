@@ -10,15 +10,25 @@
     // name of the service that devcontainer should connect to once running
     "service": "app",
     "workspaceFolder": "/app",
+    // Run everything as the non-root user
+    "remoteUser": "nonroot",
+    "updateRemoteUserUID": true,
+    "mounts": [
+        "source=${localEnv:HOME}/.gitconfig,target=/home/nonroot/.gitconfig,type=bind,consistency=cached",
+        // optional if you use the plain text helper:
+        "source=${localEnv:HOME}/.git-credentials,target=/home/nonroot/.git-credentials,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.ssh,target=/home/nonroot/.ssh,type=bind,consistency=cached"
+    ],
     // install pre-commit hooks and avoid git repos reported as unsafe
-    "postCreateCommand": "pre-commit install && git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "postCreateCommand": "pre-commit install-hooks",
     "features": {
-        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/git:1": {}
     },
     "customizations": {
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
                 "editor.tabSize": 4,
                 "editor.autoIndent": "advanced",
                 "editor.formatOnPaste": true,
@@ -45,6 +55,7 @@
                 ],
                 "python.defaultInterpreterPath": "/usr/.venv/bin/python",
                 "ruff.enable": true,
+                "cSpell.diagnosticLevel": "Hint",
                 "ruff.lint.enable": true,
                 // ensures extensions are installed
                 // see https://github.com/microsoft/vscode-remote-release/issues/9494#issuecomment-2039652897
@@ -66,12 +77,9 @@
                 "ms-toolsai.jupyter-keymap",
                 "ms-toolsai.jupyter-renderers",
                 "ms-toolsai.vscode-jupyter-cell-tags",
-                "Postman.postman-for-vscode",
-                "qwtel.sqlite-viewer",
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
-                "tamasfe.even-better-toml",
-                "VisualStudioExptTeam.vscodeintellicode",
+                "tamasfe.even-better-toml"
             ]
         }
     }

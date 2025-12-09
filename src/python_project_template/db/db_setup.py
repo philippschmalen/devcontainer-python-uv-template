@@ -1,4 +1,4 @@
-from src.config.logging_config import setup_logging
+from python_project_template.config.logging_config import setup_logging
 
 logger = setup_logging(__name__)
 

@@ -18,9 +18,6 @@
                 "8000"
             ],
             "jinja": true,
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}"
-            }
         },
         {
             "name": "Python: ./",
@@ -31,9 +28,6 @@
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": true
-            },
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}",
             },
             "justMyCode": true,
         }
