@@ -5,6 +5,8 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-ast
+      - id: check-json
+        exclude: '.*devcontainer\.json$'
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-merge-conflict
