@@ -12,13 +12,14 @@ ENV UV_TOOL_BIN_DIR=/usr/local/bin
 ENV UV_PROJECT_ENVIRONMENT=/home/$USER/.venv
 ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
 
-RUN groupadd --system --gid 999 $USER \
-    && useradd --system --gid 999 --uid 999 --create-home $USER
 
 # PRODUCTION USE: pin `uv` to a specific version (replace `latest` with <version>)
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
+RUN groupadd --system --gid 999 $USER \
+    && useradd --system --gid 999 --uid 999 --create-home $USER \
+    && chown -R $USER:$USER /app
 
 # Install the project's dependencies using the lockfile and settings
 RUN --mount=type=cache,target=/root/.cache/uv \
@@ -33,5 +34,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync
 
 USER $USER
-
 CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
