@@ -41,7 +41,7 @@ code .
 # > Dev Containers: Open Folder in Container (or similar)
 
 # after build you should see
-# CTRL+p > Python: Select Interpreter > /usr/.venv/bin/python (as defined in `Dockerfile`)
+# CTRL+p > Python: Select Interpreter > /home/nonroot/.venv/bin/python (as defined in `Dockerfile`)
 ```
 
 - Add dependencies: `uv add <package-name>` (runs inside the container)
@@ -63,14 +63,14 @@ Add this to the following files:
     }
 ```
 
+You can add this, to ensure you are logged in as your user. Or you can just run `az login`. This will open a browser so you can login. The cache credentials will be local to the devcontainer which means you can be logged in to different tenants in different devcontainers.
 ```yaml
 # .devcontainer/docker-compose.extend.yml
     volumes:
       ...
       // ADD THIS
-      - ${HOME}/.azure:/root/.azure:rw
+      - ${HOME}/.azure:/home/nonroot/.azure:rw
 ```
-
 
 
 ## Background
@@ -118,7 +118,7 @@ This approach ensures that all developers work with identical dependencies and c
 - write commits following [The seven rules of a great commit message](https://cbea.ms/git-commit/): *What- and *why- in imperative mood instead of *how*
 - follow [12-factor principles](https://12factor.net/)
 - agree on git workflow, for example [trunk-based development](https://trunkbaseddevelopment.com/)
-- Use [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) to structure docker images and only include the needed runtime dependencies for smaller image size and faster builds
+- Use [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) to structure docker images and only include the needed runtime dependencies for smaller image size and faster builds and fewer attack vectors
 - Follow a styleguide like [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
 - Tag releases with [SemVer:2.0.0](https://semver.org/spec/v2.0.0.html) or [CalVer](https://calver.org/)
 - For a changelog, adapt principles of [common-changelog](https://common-changelog.org/), written by humans for humans, a clean git history as foundation
