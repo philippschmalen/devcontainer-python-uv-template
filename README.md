@@ -69,7 +69,7 @@ You can add this, to ensure you are logged in as your user. Or you can just run 
     volumes:
       ...
       // ADD THIS
-      - ${HOME}/.azure:/root/.azure:rw
+      - ${HOME}/.azure:/home/nonroot/.azure:rw
 ```
 
 ## Vim installation
