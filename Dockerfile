@@ -5,6 +5,17 @@ FROM python:3.12-bookworm
 ENV USER=nonroot
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    git \
+    vim \
+    bind9-utils \
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 ENV UV_TOOL_BIN_DIR=/usr/local/bin
