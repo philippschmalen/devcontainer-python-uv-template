@@ -104,7 +104,7 @@ This approach ensures that all developers work with identical dependencies and c
 
 ## Advanced example for Dockerfile
 
-```
+```bash
 ARG PYTHON_VERSION=3.12-slim-bookworm
 
 # ---- Builder Stage ----
