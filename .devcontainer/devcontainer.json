@@ -22,7 +22,6 @@
     // install pre-commit hooks
     "postCreateCommand": "pre-commit install --install-hooks",
     "features": {
-        "ghcr.io/devcontainers/features/git:1": {},
         "ghcr.io/devcontainers/features/azure-cli:1": {}
     },
     "customizations": {
