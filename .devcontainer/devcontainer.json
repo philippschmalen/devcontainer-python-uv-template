@@ -19,8 +19,8 @@
         "source=${localEnv:HOME}/.git-credentials,target=/home/nonroot/.git-credentials,type=bind,consistency=cached",
         "source=${localEnv:HOME}/.ssh,target=/home/nonroot/.ssh,type=bind,consistency=cached"
     ],
-    // install pre-commit hooks and avoid git repos reported as unsafe
-    "postCreateCommand": "pre-commit install-hooks",
+    // install pre-commit hooks
+    "postCreateCommand": "pre-commit install --install-hooks",
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },

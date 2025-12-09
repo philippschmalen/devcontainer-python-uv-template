@@ -29,5 +29,6 @@ dev = [
     "mypy",
     "debugpy>=1.8.13",
     "pytest>=8.3.5",
+    "pytest-cov",
     "httpx>=0.28.1",
 ]

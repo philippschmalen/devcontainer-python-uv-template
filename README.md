@@ -41,7 +41,7 @@ code .
 # > Dev Containers: Open Folder in Container (or similar)
 
 # after build you should see
-# CTRL+p > Python: Select Interpreter > /usr/.venv/bin/python (as defined in `Dockerfile`)
+# CTRL+p > Python: Select Interpreter > /home/nonroot/.venv/bin/python (as defined in `Dockerfile`)
 ```
 
 - Add dependencies: `uv add <package-name>` (runs inside the container)
