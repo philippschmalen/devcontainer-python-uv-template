@@ -2,7 +2,12 @@
     // For format details, see https://aka.ms/devcontainer.json.
     // For config options, see the README at:
     // https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
-    "name": "Docker compose + extend",
+
+    // Name of the container. Shown in the VS Code status bar and recently used projects
+    // Set it to something more descriptive for your project.
+    "name": "my_project",
+
+    // Use the existing docker-compose.yml file from the project.
     "dockerComposeFile": [
         "../docker-compose.yml",
         "./docker-compose.extend.yml"
