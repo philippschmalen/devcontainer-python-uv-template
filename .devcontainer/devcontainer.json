@@ -57,7 +57,7 @@
                 "python.analysis.extraPaths": [
                     "${workspaceFolder}"
                 ],
-                "python.defaultInterpreterPath": "/usr/.venv/bin/python",
+                "python.defaultInterpreterPath": "/home/nonroot/.venv/bin/python",
                 "ruff.enable": true,
                 "cSpell.diagnosticLevel": "Hint",
                 // Code spell both danish and english
