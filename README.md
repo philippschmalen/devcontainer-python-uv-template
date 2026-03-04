@@ -26,11 +26,10 @@ git remote set-url origin git://new.url.here
 ```
 
 2. **Replace Placeholders**
-- Search and replace `my_project` in `docker-compose.yml` and `python-project-template` in `pyproject.toml` with your project name
-- Search and replace for `my_project` in `.devcontainer/docker-compose.extend.yml` and `.devcontainer/devcontainer.json` with your project name.
-- Update `name`, `version` in `pyproject.toml`
+- Replace `my_project` in `docker-compose.yml` with your project name
+- Replace `python-project-template` in `pyproject.toml` with your project name; update `name` and `version`
 - Update the year and copyright holder in `LICENSE`
-- update this `README.md` for your project.
+- Update this `README.md` for your project.
 
 3. **Open in VS Code & Dev Container**
 
@@ -75,14 +74,12 @@ You can add this, to ensure you are logged in as your user. Or you can just run 
 
 ## Background
 
-This template uses VSCode's [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) (devcontainers) to provide a consistent, isolated development environment. The setup leverages Docker Compose with an extension pattern:
+This template uses VSCode's [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) with Docker Compose:
 
-- `docker-compose.yml` defines the base service configuration
-- `.devcontainer/docker-compose.extend.yml` extends the base configuration specifically for development
-- The extension mounts your local project directory to `/app` in the container, enabling real-time file synchronization
-- This allows you to work on code locally in VSCode while running it in a container environment
+- `docker-compose.yml` configures services like backend or database
+- mounts your local project directory into the container, so you can edit files locally in VSCode while staying  them in a container environment
 
-This approach ensures that all developers work with identical dependencies and configurations, regardless of their local setup, while maintaining the ability to edit files directly on the host system.
+This approach ensures that all developers work with identical dependencies and configurations, regardless of their host machine.
 
 ### TLDR code & design rules
 
@@ -106,6 +103,7 @@ This approach ensures that all developers work with identical dependencies and c
 - [`uv`](https://github.com/astral-sh/uv) for dependency management
 - VS Code devcontainers with `docker compose`-file
 - Multi-stage build with `builder`, also used for development, and `production`
+- web framework example: `fastapi` with `uvicorn` (example `GET /` endpoint in `src/main.py`)
 - debugging: `debugpy`
 - testing: `pytest`
 - linting & formatting: `ruff`
@@ -126,51 +124,6 @@ This approach ensures that all developers work with identical dependencies and c
 - `AGENTS.md`: Best practices on [writing customer instructions for Github Copilot](https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/)
 
 
-## Advanced example for Dockerfile
+## Advanced Dockerfile patterns
 
-```bash
-ARG PYTHON_VERSION=3.12-slim-bookworm
-
-# ---- Builder Stage ----
-# This is what runs in your dev environment
-FROM python:${PYTHON_VERSION} AS builder
-
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
-ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
-
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
-    build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-COPY --from=ghcr.io/astral-sh/uv:0.7.14 /uv /uvx /bin/
-
-WORKDIR /app
-
-COPY ./pyproject.toml .
-COPY uv.lock .
-
-RUN uv sync
-
-# ---- Production Stage ----
-# This is what runs in the cloud
-FROM python:${PYTHON_VERSION} AS production
-
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV UV_PROJECT_ENVIRONMENT=/usr/.venv
-ENV PATH="${UV_PROJECT_ENVIRONMENT}/bin:$PATH"
-ENV PORT=8000
-
-WORKDIR /app
-
-COPY --from=builder ${UV_PROJECT_ENVIRONMENT} ${UV_PROJECT_ENVIRONMENT}
-COPY src src
-
-EXPOSE ${PORT}
-
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
+See [Dockerfile-advanced-notes.md](Dockerfile-advanced-notes.md) for an annotated multi-stage build example covering the builder and production stages.
