@@ -69,12 +69,9 @@
             },
             "extensions": [
                 "charliermarsh.ruff",
-                "christian-kohler.path-intellisense",
-                "dotenv.dotenv-vscode",
-                "github.copilot",
+                "DavidAnson.vscode-markdownlint",
                 "GitHub.copilot-chat",
                 "GitHub.vscode-pull-request-github",
-                "johnpapa.vscode-peacock",
                 "ms-azuretools.vscode-docker",
                 "ms-python.python",
                 "ms-python.mypy-type-checker",
