@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     # uncomment if using .env for config/secrets
     # env_file: .env
-    platform: linux/amd64
     container_name: "${COMPOSE_PROJECT_NAME}"
     hostname: app
     volumes:

@@ -19,10 +19,9 @@
     "remoteUser": "nonroot",
     "updateRemoteUserUID": true,
     "mounts": [
-        "source=${localEnv:HOME}/.gitconfig,target=/home/nonroot/.gitconfig,type=bind,consistency=cached",
-        // optional if you use the plain text helper:
-        "source=${localEnv:HOME}/.git-credentials,target=/home/nonroot/.git-credentials,type=bind,consistency=cached",
-        "source=${localEnv:HOME}/.ssh,target=/home/nonroot/.ssh,type=bind,consistency=cached"
+        // Keep shared Git config simple by default.
+        // For SSH keys, plain-text helpers, or custom ~/.ssh files, use the opt-in examples in README.md.
+        "source=${localEnv:HOME}/.gitconfig,target=/home/nonroot/.gitconfig,type=bind,consistency=cached"
     ],
     // install pre-commit hooks
     "postCreateCommand": "pre-commit install --install-hooks",
