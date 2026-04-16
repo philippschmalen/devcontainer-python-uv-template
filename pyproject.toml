@@ -16,17 +16,18 @@ build-backend = "uv_build"
 [tool.ruff]
 fix = true
 
-[tool.mypy]
-warn_return_any = false
-warn_unused_configs = true
-disallow_untyped_defs = false
-ignore_missing_imports = false
+[tool.pyrefly]
+project-includes = ["src", "tests"]
+check-unannotated-defs = true
+strict-callable-subtyping = true
+infer-return-types = "annotated"
+min-severity = "warn"
 
 [dependency-groups]
 dev = [
     "ruff",
     "pre-commit",
-    "mypy",
+    "pyrefly",
     "debugpy>=1.8.13",
     "pytest>=8.3.5",
     "pytest-cov",
