@@ -19,11 +19,14 @@
     "remoteUser": "nonroot",
     "updateRemoteUserUID": true,
     "mounts": [
+        // Keep shared Git config simple by default.
+        // If you need SSH keys, plain-text helpers, or custom ~/.ssh files, add those mounts explicitly.
         "source=${localEnv:HOME}/.gitconfig,target=/home/nonroot/.gitconfig,type=bind,consistency=cached",
-        // optional if you use the plain text helper:
-        "source=${localEnv:HOME}/.git-credentials,target=/home/nonroot/.git-credentials,type=bind,consistency=cached",
-        "source=${localEnv:HOME}/.ssh,target=/home/nonroot/.ssh,type=bind,consistency=cached"
+        "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
     ],
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "/ssh-agent"
+    },
     // install pre-commit hooks
     "postCreateCommand": "pre-commit install --install-hooks",
     "features": {
@@ -72,9 +75,9 @@
                 "DavidAnson.vscode-markdownlint",
                 "GitHub.copilot-chat",
                 "GitHub.vscode-pull-request-github",
+                "meta.pyrefly",
                 "ms-azuretools.vscode-docker",
                 "ms-python.python",
-                "ms-python.mypy-type-checker",
                 "ms-python.debugpy",
                 "ms-toolsai.jupyter",
                 "ms-toolsai.jupyter-keymap",
@@ -83,7 +86,7 @@
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
                 "streetsidesoftware.code-spell-checker-danish",
-                "tamasfe.even-better-toml"
+                "tamasfe.even-better-toml",
             ]
         }
     }

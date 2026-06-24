@@ -48,6 +48,32 @@ code .
 - want to ignore files that are specific to *you* without using `.gitignore`? Add them to `.git/info/exclude`
 
 
+## Git authentication in the dev container
+
+SSH agent forwarding is used to authenticate with GitHub inside the container. VS Code dev containers forward the host's SSH agent automatically, so the fix is almost always just loading your key into the agent on the WSL host before opening the container.
+
+```bash
+# 1. Test inside the dev container — does it already work?
+ssh -T git@github.com
+# ✅ Works:    Hi <your-github-username>! You've successfully authenticated...
+# ❌ Broken:   git@github.com: Permission denied (publickey).
+
+# If broken, fix it from your WSL terminal on the host:
+
+# 2. Load your SSH key into the agent (WSL host, not inside the container)
+eval "$(ssh-agent -s)"          # start the agent if not already running
+ssh-add -l                      # list loaded keys — if your key is here, skip the next line
+ssh-add ~/.ssh/id_ed25519       # load your key (adjust the filename if yours differs)
+
+# 3. Make sure the repo remote uses SSH, not HTTPS
+git remote -v                   # should show: origin git@github.com:OWNER/REPO.git
+# git remote set-url origin git@github.com:OWNER/REPO.git  # run this if it shows https://
+
+# 4. Rebuild / reopen the dev container, then retest
+ssh -T git@github.com
+```
+
+
 ## Azure CLI setup
 
 Want to use an already authenticated `az cli` from the host?
